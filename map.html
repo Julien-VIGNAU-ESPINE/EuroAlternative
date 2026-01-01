@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Map - euroAlternative</title>
+    <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        /* Full screen map */
+        #map-container {
+            width: 100vw;
+            height: calc(100vh - 80px);
+            /* Minus header height approx */
+            margin-top: 0;
+            z-index: 1;
+        }
+
+        /* Custom Header Override for Map Page */
+        header {
+            position: relative;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Popup Styling to match Premium Look */
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .leaflet-popup-content {
+            margin: 0;
+            width: 300px !important;
+        }
+
+        .map-popup-header {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-bottom: 1px solid #eaeaea;
+            font-weight: 800;
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .map-popup-body {
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+
+        .map-popup-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .map-popup-item:hover {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .map-popup-logo {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .map-popup-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Custom Marker */
+        .custom-marker {
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-family: var(--font-body);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+            border: 2px solid white;
+            transition: transform 0.2s;
+        }
+
+        .custom-marker:hover {
+            transform: scale(1.1);
+            z-index: 1000 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="nav-branding" style="text-decoration: none;">
+                <!-- Reusing branding style -->
+                <span>🇪🇺 EuroAlternative</span>
+            </a>
+            <div class="search-container">
+                <a href="index.html" class="btn" style="padding: 0.5rem 1rem;">← Back to List</a>
+            </div>
+            <div class="nav-branding">
+                <!-- Toggle Removed -->
+            </div>
+        </div>
+    </header>
+
+    <div id="map-container"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/map.js"></script>
+</body>
+
+</html>
