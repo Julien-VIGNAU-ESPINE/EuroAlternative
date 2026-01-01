@@ -66,7 +66,13 @@ function renderAlternatives(items) {
         }
 
         const logoUrl = `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`;
-        const flag = getCountryFlag(item.country);
+
+        // Handle multiple countries (e.g. "France/Germany")
+        const itemCountries = item.country.split('/').map(c => c.trim());
+        const flagsHtml = itemCountries.map(c => {
+            const flag = getCountryFlag(c);
+            return `<span style="white-space: nowrap;">${flag} ${c}</span>`;
+        }).join('<span style="margin: 0 4px;">/</span>');
 
         // Eco badge is NOT shown here (requested by user), only on product page.
 
@@ -92,7 +98,7 @@ function renderAlternatives(items) {
             
             <div class="card-footer">
                 <span class="country-tag">
-                    ${flag} ${item.country}
+                    ${flagsHtml}
                 </span>
                 <a href="${item.link}" target="_blank" class="btn">Visit</a>
             </div>
@@ -136,7 +142,11 @@ function renderCategories() {
 function renderCountries() {
     if (!countryList) return;
 
-    const countries = [...new Set(alternatives.map(item => item.country))].sort();
+    // Split country strings like "France/Germany" into individual countries
+    const countries = [...new Set(alternatives.flatMap(item =>
+        item.country.split('/').map(c => c.trim())
+    ))].sort();
+
     countryList.innerHTML = '';
 
     countries.forEach(country => {
@@ -149,8 +159,12 @@ function renderCountries() {
             document.querySelectorAll('.category-list li').forEach(el => el.classList.remove('active'));
             li.classList.add('active');
 
-            // Logic
-            const filtered = alternatives.filter(item => item.country === country);
+            // Logic: Check if item's country string includes the selected country
+            const filtered = alternatives.filter(item => {
+                const itemCountries = item.country.split('/').map(c => c.trim());
+                return itemCountries.includes(country);
+            });
+
             renderAlternatives(filtered);
             updateResultsHeader(filtered.length, `Made in ${country}`);
 
@@ -224,8 +238,8 @@ function initMobileMenu() {
         // Simplest is generic click on sidebar that targets LI or A.
         sidebar.addEventListener('click', (e) => {
             if (e.target.tagName === 'LI' || e.target.tagName === 'A' || e.target.closest('li')) {
-                 sidebar.classList.remove('open');
-                 overlay.classList.remove('active');
+                sidebar.classList.remove('open');
+                overlay.classList.remove('active');
             }
         });
     }
