@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - euroAlternative</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Specific Styles for Product Page */
+        .product-container {
+            max-width: 800px;
+            margin: 4rem auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--primary-color);
+            transform: translateX(-5px);
+        }
+
+        .product-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 24px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .product-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .product-title h1 {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .product-body {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-main);
+            margin-bottom: 3rem;
+        }
+
+        .alternatives-box {
+            background: #f1f5f9;
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 3rem;
+        }
+
+        .alternatives-box h3 {
+            color: var(--text-light);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .alternatives-list {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .cta-section {
+            text-align: center;
+        }
+
+        .btn-large {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-md);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-large:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <div class="product-container" id="product-content">
+            <!-- Content Injected Here -->
+            <a href="index.html" class="back-link">← Back to Alternatives</a>
+            <div style="text-align: center; padding: 4rem;">Loading...</div>
+        </div>
+    </main>
+
+    <script src="scripts/data.js"></script>
+    <script>
+        // Internal Script for single page logic
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+        const container = document.getElementById('product-content');
+
+        const product = alternatives.find(p => p.id === productId);
+
+        function getCountryFlag(countryName) {
+            const isoCodes = {
+                'France': 'fr',
+                'Germany': 'de',
+                'Switzerland': 'ch',
+                'Sweden': 'se',
+                'Netherlands': 'nl',
+                'Lithuania': 'lt',
+                'Estonia': 'ee',
+                'Germany/UAE': 'de',
+                'UAE': 'ae'
+            };
+            const code = isoCodes[countryName] || 'eu';
+            return `<img src="https://flagcdn.com/24x18/${code}.png" class="country-flag" alt="${countryName}">`;
+        }
+        function getEcoDescription(grade) {
+            const desc = {
+                'A': 'Excellent - Low carbon footprint, renewable energy, or circular economy.',
+                'B': 'Good - Better than average, some green initiatives.',
+                'C': 'Average - Standard tech industry impact.',
+                'D': 'High Impact - Resource intensive (video, extensive cloud compute).',
+                'E': 'Very High Impact - Heavy resource usage.'
+            };
+            return desc[grade] || 'Not rated';
+        }
+
+        if (product) {
+
+            // Logo Logic
+            const initial = product.name.charAt(0);
+            let hostname = '';
+            try {
+                hostname = new URL(product.link).hostname.replace('www.', '');
+            } catch (e) {
+                hostname = product.link;
+            }
+            const logoUrl = `https://www.google.com/s2/favicons?domain=${hostname}&sz=128`;
+            const flag = getCountryFlag(product.country);
+
+
+            document.title = `${product.name} - euroAlternative`;
+
+            container.innerHTML = `
+                <a href="index.html" class="back-link">← Back to Alternatives</a>
+                
+                <div class="product-header">
+                    <div class="product-logo">
+                        <img src="${logoUrl}" alt="${product.name}" onerror="this.style.display='none'; this.parentElement.innerText='${initial}'">
+                    </div>
+                    <div class="product-title">
+                        <div class="card-category">${product.category}</div>
+                        <h1>${product.name}</h1>
+                        <div class="product-meta">
+                            <span class="country-tag">${flag} Based in ${product.country}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="eco-score-card">
+                    <div class="eco-badge eco-${product.ecoGrade.toLowerCase()}">${product.ecoGrade}</div>
+                    <div>
+                        <div class="eco-score-label">Eco-Impact Score</div>
+                        <div style="font-size: 0.9rem; color: #555;">
+                            ${getEcoDescription(product.ecoGrade)}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alternatives-box">
+                    <h3>Great Alternative to</h3>
+                    <div class="alternatives-list">${product.alternativeTo}</div>
+                </div>
+
+                <div class="product-body">
+                    <p>${product.description}</p>
+                    <p>By choosing <strong>${product.name}</strong>, you are supporting the European tech ecosystem and opting for a solution that respects local regulations and values.</p>
+                </div>
+
+                <div class="pros-cons-grid">
+                    <div class="pros-box">
+                        <h3>✅ Advantages</h3>
+                        <ul>
+                            ${product.pros ? product.pros.map(p => `<li>${p}</li>`).join('') : '<li>No data available</li>'}
+                        </ul>
+                    </div>
+                    <div class="cons-box">
+                        <h3>⚠️ Disadvantages</h3>
+                        <ul>
+                            ${product.cons ? product.cons.map(c => `<li>${c}</li>`).join('') : '<li>No data available</li>'}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cta-section">
+                    <a href="${product.link}" target="_blank" class="btn-large">Visit Official Website</a>
+                </div>
+            `;
+        } else {
+            container.innerHTML = `
+                <a href="index.html" class="back-link">← Back to Alternatives</a>
+                <div style="text-align: center; padding: 4rem;">
+                    <h2>Product not found</h2>
+                    <p>Sorry, we couldn't find the product you're looking for.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+
+</html>

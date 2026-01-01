@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>euroAlternative - European Alternatives to Big Tech</title>
+    <meta name="description"
+        content="Discover European alternatives to popular global services and products. Respect privacy, support local innovation.">
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar Fixed Left -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <h3>EuroAlternative</h3>
+        </div>
+
+        <div class="sidebar-section">
+            <h4
+                style="margin: 1rem 0 0.5rem; padding: 0 1rem; color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">
+                Categories</h4>
+            <ul id="category-list" class="category-list">
+                <!-- Categories injected by JS -->
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h4
+                style="margin: 1.5rem 0 0.5rem; padding: 0 1rem; color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">
+                Countries</h4>
+            <ul id="country-list" class="category-list">
+                <!-- Countries injected by JS -->
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-content-wrapper">
+
+        <!-- Top Navigation Sticky Bar -->
+        <header class="top-nav">
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" placeholder="Search alternatives (e.g. 'Twitter')...">
+            </div>
+            <div class="nav-branding">
+                <span>🇪🇺 Beta</span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero / Welcome Banner -->
+            <div class="hero-banner">
+                <div class="logo-container">
+                    <div class="stars-ring">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <div class="logo-center">E</div>
+                </div>
+                <div class="hero-text">
+                    <h1>euroAlternative</h1>
+                    <p>Stop feeding Big Tech. Switch to European privacy-first alternatives.</p>
+                </div>
+            </div>
+
+            <div class="results-header">
+                <h2 id="results-title">All Alternatives</h2>
+                <span id="results-count">0 results</span>
+            </div>
+            <div class="alternatives-grid">
+                <!-- Cards will be injected here by app.js -->
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 euroAlternative. Built for a better digital sovereignty.</p>
+        </footer>
+    </div>
+
+    <script src="scripts/data.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+
+</html>
