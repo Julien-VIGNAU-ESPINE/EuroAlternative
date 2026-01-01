@@ -1,38 +1,43 @@
-:root {
-    /* Brand Colors */
-    --primary-color: #0f172a;
-    /* Slate 900 - Deep Navy */
-    --accent-color: #3b82f6;
-    /* Blue 500 - Vivid Tech Blue */
-    --accent-hover: #2563eb;
-    /* Blue 600 */
-    --gold-accent: #f59e0b;
-    /* Amber 500 - Subtle nod to EU stars */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap');
 
-    /* Backgrounds */
-    --bg-color: #f8fafc;
-    /* Slate 50 */
+:root {
+    /* Brand Colors - Modern Premium */
+    --primary-color: #000000;
+    /* Deep Black */
+    --accent-color: #2563eb;
+    /* Electric Blue */
+    --accent-hover: #1d4ed8;
+    --gold-accent: #facc15;
+    /* Vibrant Yellow */
+
+    /* Backgrounds - High Contrast */
+    --bg-color: #fafafa;
     --card-bg: #ffffff;
+    --sidebar-bg: #f5f5f5;
+    /* Slight contrast for sidebar */
 
     /* Typography */
-    --text-main: #334155;
-    /* Slate 700 */
-    --text-light: #64748b;
-    /* Slate 500 */
-    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --text-main: #171717;
+    /* Neutral 900 */
+    --text-light: #737373;
+    /* Neutral 500 */
+    --font-heading: 'Plus Jakarta Sans', sans-serif;
+    /* Geometric Modern */
+    --font-body: 'Inter', sans-serif;
 
     /* Spacing & Layout */
     --radius-sm: 8px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
-    --container-width: 1200px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --container-width: 1400px;
+    /* Wider */
 
-    /* Effects */
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Effects - Minimal */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+    --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+    --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Apple/Vercel ease */
 }
 
 * {
@@ -43,14 +48,14 @@
 
 body {
     font-family: var(--font-body);
-    background-color: #f8fafc;
-    /* Slate 50 */
-    /* Subtle light mesh/grain can be added here if needed, but keeping it clean for now */
-    background-image: linear-gradient(to bottom, #f1f5f9, #f8fafc);
+    background-color: var(--bg-color);
     color: var(--text-main);
-    line-height: 1.6;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.01em;
+    /* Tighter modern look */
     min-height: 100vh;
+    background-image: none;
 }
 
 /* Top Navigation Bar */
@@ -62,9 +67,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.98);
+    /* Less translucent */
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .search-wrapper {
@@ -85,71 +90,93 @@ body {
 #search-input {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 2.8rem;
-    border-radius: 50px;
-    border: 1px solid #cbd5e1;
+    border-radius: var(--radius-sm);
+    /* Sharper */
+    border: 1px solid #d1d5db;
+    /* Gray 300 */
     font-size: 0.95rem;
-    background: white;
-    box-shadow: var(--shadow-sm);
+    background: #fdfdfc;
+    /* Paper white */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+    /* Inner shadow for depth */
     transition: var(--transition);
     color: var(--primary-color);
 }
 
 #search-input:focus {
     outline: none;
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    border-color: var(--primary-color);
+    background: white;
+    box-shadow: 0 0 0 2px rgba(30, 58, 138, 0.1);
 }
 
 .nav-branding {
     font-weight: 700;
     color: var(--primary-color);
-    opacity: 0.8;
-}
-
-/* Hero Banner */
-.hero-banner {
-    background: linear-gradient(120deg, var(--primary-color), #2563eb);
-    padding: 3rem;
-    border-radius: var(--radius-lg);
-    margin-bottom: 3rem;
-    color: white;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    box-shadow: var(--shadow-lg);
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-banner::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1));
-    transform: skewX(-20deg) translateX(50%);
-}
-
-.hero-text h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+    /* Serif Brand */
     letter-spacing: -0.02em;
 }
 
+/* Hero Banner - Modern Premium */
+.hero-banner {
+    background: transparent;
+    padding: 4rem 0 2rem 0;
+    border-radius: 0;
+    margin-bottom: 4rem;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: none;
+    position: relative;
+    overflow: visible;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.hero-banner::after {
+    display: none;
+    /* Remove texture */
+}
+
+/* Logo restored below */
+
+.hero-text h1 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    /* Massive */
+    font-weight: 800;
+    /* Extra Bold */
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, #000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: black;
+    /* Fallback */
+}
+
 .hero-text p {
-    font-size: 1.1rem;
-    opacity: 0.9;
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: var(--text-light);
     max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+    line-height: 1.6;
 }
 
 /* Logo Animation */
+/* Logo Animation - Modern Large */
 .logo-container {
+    display: block;
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 2rem;
     flex-shrink: 0;
 }
 
@@ -158,16 +185,19 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2rem;
-    font-weight: 900;
-    color: #ffd700;
-    /* Gold */
+    font-size: 3rem;
+    font-weight: 800;
+    /* Extra Bold */
+    color: var(--text-main);
+    /* Black */
+    z-index: 10;
 }
 
 .stars-ring {
     width: 100%;
     height: 100%;
-    animation: spin 20s linear infinite;
+    animation: spin 60s linear infinite;
+    /* Slow majestic spin */
     position: relative;
 }
 
@@ -175,10 +205,11 @@ body {
     position: absolute;
     top: 0;
     left: 50%;
-    transform-origin: 0 40px;
-    /* Radius of ring */
-    font-size: 0.8rem;
-    color: #ffd700;
+    transform-origin: 0 60px;
+    /* Radius matches container size */
+    font-size: 1rem;
+    color: var(--accent-color);
+    /* Electric Blue */
 }
 
 /* Position stars in a circle */
@@ -245,41 +276,41 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 280px;
+    width: 260px;
+    /* Slightly narrower */
     height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: var(--shadow-lg);
+    background: var(--sidebar-bg);
+    border-right: 1px solid #eaeaea;
+    box-shadow: none;
     z-index: 100;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     overflow-y: auto;
 }
 
 .main-content-wrapper {
-    margin-left: 280px;
-    /* Width of sidebar */
-    width: calc(100% - 280px);
+    margin-left: 260px;
+    width: calc(100% - 260px);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 main {
-    max-width: 1400px;
+    max-width: 1600px;
+    /* Wider for grid */
     margin: 0 auto;
-    padding: 2rem 3rem 2rem;
-    /* Adjusted padding for sticky header */
+    padding: 2rem 4rem 4rem;
     width: 100%;
 }
 
 .sidebar h3 {
-    font-size: 1.2rem;
+    font-family: var(--font-heading);
+    font-size: 1rem;
     text-transform: uppercase;
-    color: var(--primary-color);
+    color: var(--text-main);
     font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -288,7 +319,7 @@ main {
 /* Add a pseudo-icon to the sidebar title */
 .sidebar h3::before {
     content: '🇪🇺';
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 #category-list {
@@ -296,35 +327,32 @@ main {
 }
 
 #category-list li {
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
     cursor: pointer;
-    border-radius: var(--radius-sm);
-    color: var(--text-main);
+    border-radius: 6px;
+    color: var(--text-light);
     font-weight: 500;
     transition: var(--transition);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: var(--text-light);
-    font-weight: 600;
+    font-size: 0.9rem;
 }
 
 #category-list li:hover {
-    background-color: #f1f5f9;
-    color: var(--primary-color);
-    background-color: #eff6ff;
-    color: var(--accent-color);
+    background-color: rgba(0, 0, 0, 0.03);
+    color: var(--text-main);
 }
 
 #category-list li.active {
-    background-color: #eff6ff;
-    /* Blue 50 */
+    background-color: #ffffff;
     color: var(--accent-color);
-    font-weight: 600;
-    background-color: var(--accent-color);
-    color: white;
-    box-shadow: var(--shadow-sm);
+    font-weight: 700;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eaeaea;
+    border-left: none;
+    /* Reset old style */
 }
 
 .results-header {
@@ -332,133 +360,135 @@ main {
     justify-content: space-between;
     align-items: baseline;
     margin-bottom: 2rem;
-    border-bottom: 1px solid #e2e8f0;
-    padding-bottom: 1rem;
+    border-bottom: none;
+    /* Cleaner */
+    padding-bottom: 0;
 }
 
 #results-title {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    font-weight: 700;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--text-main);
+    font-weight: 800;
+    letter-spacing: -0.03em;
 }
 
 #results-count {
     color: var(--text-light);
     font-size: 0.9rem;
+    font-family: var(--font-body);
+    font-weight: 500;
 }
 
 .alternatives-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    /* Generic card width */
+    gap: 1.5rem;
 }
 
-/* Card Styling */
+/* Card Styling - MODERN MINIMAL */
 .card {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(10px);
+    background: white;
+    backdrop-filter: none;
     border-radius: var(--radius-md);
     padding: 2rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid #eaeaea;
     display: flex;
     flex-direction: column;
     height: 100%;
     position: relative;
-    animation: fadeIn 0.4s ease-out forwards;
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: var(--shadow-lg);
-    background: white;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
     border-color: var(--accent-color);
     z-index: 10;
 }
 
 .card-header-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    /* Align top */
     gap: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .card-logo {
-    width: 48px;
-    height: 48px;
-    background: white;
+    width: 56px;
+    height: 56px;
+    background: #fdfdfd;
     border-radius: 12px;
+    /* Consistent radius */
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
+    font-weight: 700;
+    color: var(--text-main);
+    box-shadow: none;
+    border: 1px solid #f0f0f0;
     overflow: hidden;
-    /* Clip image if necessary */
+    padding: 8px;
+    /* More padding */
 }
 
 .card-logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    /* Scale generic logos nicely */
-    padding: 4px;
-    /* Give it some breathing room */
 }
 
 .card-category {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     color: var(--accent-color);
     font-weight: 700;
     letter-spacing: 0.05em;
-    background: rgba(59, 130, 246, 0.1);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    display: inline-block;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    display: block;
+    margin-bottom: 0.25rem;
 }
 
 .card h2 {
+    font-family: var(--font-heading);
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--primary-color);
+    color: var(--text-main);
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 
 .card .alternative-to {
-    font-size: 0.95rem;
-    color: #b91c1c;
-    /* Red 700 */
-    background: #fef2f2;
-    /* Red 50 */
-    border: 1px solid #fecaca;
-    /* Red 200 */
+    font-size: 0.9rem;
+    color: var(--text-light);
+    background: #f9f9f9;
+    border: none;
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+    width: fit-content;
 }
 
 .card .alternative-to span:first-child {
-    font-size: 1.2rem;
+    font-size: 1rem;
+    opacity: 0.6;
 }
 
 .card .alternative-to::before {
-    content: 'vs';
-    font-size: 0.75rem;
-    background: #f1f5f9;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
-    color: #94a3b8;
+    display: none;
+    /* Remove "vs" box */
 }
 
 .card .description {
@@ -793,5 +823,60 @@ footer {
 @media (max-width: 600px) {
     .pros-cons-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* --- Monetization (Ads) --- */
+.ad-space {
+    display: none;
+    /* Hidden by default */
+    background-color: #f1f5f9;
+    border: 2px dashed #cbd5e1;
+    color: #64748b;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1rem;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Visibility Toggle */
+body.show-ads .ad-space {
+    display: flex;
+}
+
+.ad-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    color: #94a3b8;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
+.ad-content {
+    font-weight: bold;
+    font-style: italic;
+}
+
+/* Specific Sizes */
+.sidebar-ad {
+    height: 250px;
+    /* Square/Rect ad */
+    margin: 2rem 1rem;
+}
+
+.banner-ad {
+    height: 90px;
+    /* Leaderboard ad */
+    margin: 0 2rem 2rem 2rem;
+}
+
+@media (max-width: 768px) {
+    .banner-ad {
+        margin: 0 1rem 1rem 1rem;
+        height: 60px;
     }
 }

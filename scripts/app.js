@@ -28,7 +28,13 @@ function getCountryFlag(countryName) {
         'Portugal': 'pt',
         'Ireland': 'ie',
         'Latvia': 'lv',
-        'Denmark': 'dk'
+        'Denmark': 'dk',
+        'Norway': 'no',
+        'Austria': 'at',
+        'Poland': 'pl',
+        'Czech Republic': 'cz',
+        'Europe': 'eu',
+        'EU': 'eu'
     };
     // Helper to find key efficiently
     const normalized = Object.keys(isoCodes).find(k => k.toLowerCase() === countryName.toLowerCase());
@@ -203,6 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderAlternatives(alternatives);
     updateResultsHeader(alternatives.length, "All Alternatives");
     initMobileMenu();
+    initAds();
 });
 
 // --- Mobile Menu Logic ---
@@ -241,6 +248,19 @@ function initMobileMenu() {
                 sidebar.classList.remove('open');
                 overlay.classList.remove('active');
             }
+        });
+    }
+}
+
+// --- Monetization Logic ---
+
+function initAds() {
+    const toggleBtn = document.getElementById('ad-secret-toggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('show-ads');
+            toggleBtn.style.opacity = document.body.classList.contains('show-ads') ? '1' : '0.5';
+            toggleBtn.textContent = document.body.classList.contains('show-ads') ? "π (Ads ON)" : "π";
         });
     }
 }
