@@ -188,4 +188,45 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCountries();
     renderAlternatives(alternatives);
     updateResultsHeader(alternatives.length, "All Alternatives");
+    initMobileMenu();
 });
+
+// --- Mobile Menu Logic ---
+
+function initMobileMenu() {
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    // Create overlay if it doesn't exist
+    let overlay = document.querySelector('.overlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        document.body.appendChild(overlay);
+    }
+
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+
+        // Close when clicking overlay
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+
+        // Close when clicking any clickable item in sidebar (mobile UX)
+        // We defer this slightly to ensure dynamic list items are handled if this runs before they are created?
+        // Actually, renderCategories() runs before this, so list items should be there.
+        // However, we should use delegation or re-attach updates. 
+        // Simplest is generic click on sidebar that targets LI or A.
+        sidebar.addEventListener('click', (e) => {
+            if (e.target.tagName === 'LI' || e.target.tagName === 'A' || e.target.closest('li')) {
+                 sidebar.classList.remove('open');
+                 overlay.classList.remove('active');
+            }
+        });
+    }
+}
